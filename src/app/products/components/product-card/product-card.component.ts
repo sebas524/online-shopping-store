@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Product } from '../../interfaces/product.interface';
+import { SlicePipe } from '@angular/common';
+import { ProductImagePipe } from '../../pipes/product-image.pipe';
 
 @Component({
   selector: 'app-product-card',
-  imports: [RouterLink],
+  imports: [RouterLink, SlicePipe, ProductImagePipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css',
   animations: [
@@ -16,4 +19,12 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ]),
   ],
 })
-export class ProductCardComponent {}
+export class ProductCardComponent {
+  product = input.required<Product>();
+
+  imageUrl = computed(() => {
+    return `http://localhost:3000/api/files/product/${
+      this.product().images[0]
+    }`;
+  });
+}
