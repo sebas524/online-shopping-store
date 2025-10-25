@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ProductsResponse } from '../interfaces/product.interface';
+import { Product, ProductsResponse } from '../interfaces/product.interface';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
@@ -34,5 +34,13 @@ export class ProductsService {
           console.log('Products fetched:', response);
         })
       );
+  }
+
+  getProductById(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.baseUrl}/products/${id}`).pipe(
+      tap((response) => {
+        console.log(`Product ${id} fetched:`, response);
+      })
+    );
   }
 }
