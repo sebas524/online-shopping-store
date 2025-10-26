@@ -2,12 +2,12 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../../products/services/products.service';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { CurrencyPipe, NgClass } from '@angular/common';
+import { CommonModule, CurrencyPipe, NgClass } from '@angular/common';
 import { ImageCarouselComponent } from '../../../shared/components/image-carousel/image-carousel.component';
 
 @Component({
   selector: 'app-product-page',
-  imports: [ImageCarouselComponent],
+  imports: [ImageCarouselComponent, CommonModule],
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.css',
 })

@@ -1,34 +1,107 @@
-<p>product-page works!</p>
-
 @if (productResource.isLoading()) {
-
 <div class="flex justify-center items-center h-screen">
-  <span class="loading loading-spinner loading-xl"></span>
+  <span class="loading loading-spinner loading-xl text-primary"></span>
 </div>
-
-}
-
-<!-- show product here: -->
-
-@if (productResource.hasValue()) {
-
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-  <!-- images... -->
-
+} @if (productResource.hasValue()) {
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 px-4 py-10">
+  <!-- 🖼️ Left: Image Carousel -->
   <app-image-carousel
     [images]="productResource.value().images"
   ></app-image-carousel>
-  <div>
-    <h2 class="text-2xl font-extralight">
+
+  <!-- 🧾 Right: Product Details -->
+  <div
+    class="flex flex-col justify-center space-y-6 bg-base-200 p-6 rounded-2xl shadow-md"
+  >
+    <!-- Title -->
+    <h2 class="text-3xl font-bold text-base-content">
       {{ productResource.value().title }}
     </h2>
 
-    <div class="divider"></div>
+    <!-- Gender and Tags -->
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="badge badge-outline badge-primary capitalize">{{
+        productResource.value().gender
+      }}</span>
+      @for (tag of productResource.value().tags; track $index) {
+      <span class="badge badge-outline">{{ tag }}</span>
+      }
+    </div>
 
-    <p>
+    <!-- Price -->
+    <div class="text-4xl font-semibold text-primary">
+      €{{ productResource.value().price }}
+    </div>
+
+    <div class="divider my-2"></div>
+
+    <!-- Description -->
+    <p class="text-base-content/80 leading-relaxed">
       {{ productResource.value().description }}
     </p>
+
+    <!-- Sizes -->
+    <div class="space-y-2">
+      <h3
+        class="text-sm font-semibold uppercase tracking-wide text-base-content/70"
+      >
+        Available sizes
+      </h3>
+      <div class="flex flex-wrap gap-2">
+        @for (size of productResource.value().sizes; track $index) {
+        <button
+          class="btn btn-sm rounded-full border border-base-300 hover:border-primary hover:text-primary"
+        >
+          {{ size }}
+        </button>
+        }
+      </div>
+    </div>
+
+    <!-- Stock -->
+    <div class="text-sm text-base-content/60">
+      In stock:
+      <span
+        [ngClass]="{
+          'text-success font-semibold': productResource.value().stock > 0,
+          'text-error font-semibold': productResource.value().stock === 0
+        }"
+      >
+        {{ productResource.value().stock }}
+      </span>
+    </div>
+
+    <!-- Quantity and Add to Cart -->
+    <div class="flex items-center gap-3 pt-4">
+      <div class="join">
+        <button class="join-item btn btn-sm">-</button>
+        <input
+          type="number"
+          min="1"
+          value="1"
+          class="join-item input input-sm input-bordered w-16 text-center"
+        />
+        <button class="join-item btn btn-sm">+</button>
+      </div>
+
+      <button class="btn btn-primary btn-md flex-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5 mr-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m0 0h14m-14 0a1 1 0 01-1-1v-1m15 2a1 1 0 001-1v-1m-1 2h-13"
+          />
+        </svg>
+        Add to Cart
+      </button>
+    </div>
   </div>
 </div>
-
 }

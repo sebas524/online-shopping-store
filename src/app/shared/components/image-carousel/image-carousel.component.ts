@@ -16,18 +16,13 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { ProductImagePipe } from '../../../products/pipes/product-image.pipe';
 @Component({
   selector: 'app-image-carousel',
   standalone: true,
-  imports: [],
+  imports: [ProductImagePipe],
   templateUrl: './image-carousel.component.html',
   styleUrl: './image-carousel.component.css',
-  styles: `
-  .swiper{
-    width: 100%;
-    height: 500px;
-    background-color: #833;
-  }`,
 })
 export class ImageCarouselComponent implements AfterViewInit {
   images = input.required<string[]>();
