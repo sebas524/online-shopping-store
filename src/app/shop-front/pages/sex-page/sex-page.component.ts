@@ -41,6 +41,9 @@ export class SexPageComponent {
         case 'kid':
           gender = 'kid';
           break;
+        case 'unisex':
+          gender = 'unisex';
+          break;
         default:
           gender = 'unisex';
       }
