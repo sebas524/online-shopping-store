@@ -1,6 +1,11 @@
 <p>sex-page works!</p>
 
-<h1 class="text-3xl font-semibold my-3">Products for {{ sex() }}</h1>
+<h1 class="text-3xl font-semibold my-3">
+  Products for
+  <span class="text-primary">
+    {{ sex() }}
+  </span>
+</h1>
 <h2 class="text-xl font-semibold">enjoy our catalog!</h2>
 
 @if (productsResource.isLoading()) {
