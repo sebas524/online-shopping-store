@@ -1,6 +1,11 @@
 <p>sex-page works!</p>
 
-<h1 class="text-3xl font-semibold my-3">Products for {{ sex() }}</h1>
+<h1 class="text-3xl font-semibold my-3">
+  Products for
+  <span class="text-primary">
+    {{ sex() }}
+  </span>
+</h1>
 <h2 class="text-xl font-semibold">enjoy our catalog!</h2>
 
 @if (productsResource.isLoading()) {
@@ -12,6 +17,11 @@
   Something went wrong. Please try again later.
 </p>
 }
+
+<app-pagination
+  [pages]="productsResource.value()?.pages ?? 0"
+  [currentPage]="paginationService.currentPage()"
+></app-pagination>
 <div
   class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4"
 >
