@@ -96,7 +96,31 @@
       </li>
     </ul>
   </div>
-  <div class="navbar-end">
-    <a class="btn btn-primary">Button</a>
+  <div class="navbar-end gap-4">
+    @if (authService.authStatus() === "authenticated") {
+
+    <!-- User button -->
+    <button class="btn btn-sm btn-info btn-outline">
+      {{ authService.user()?.fullName }}
+    </button>
+
+    <!-- Logout button -->
+    <button class="btn btn-sm btn-primary" (click)="authService.logout()">
+      Logout
+    </button>
+
+    } @else if (authService.authStatus() === "not-authenticated") {
+
+    <!-- Login button -->
+    <a routerLink="/auth/login" class="btn btn-sm btn-primary btn-outline">
+      Login
+    </a>
+
+    } @else {
+
+    <!-- Loading state -->
+    <button class="btn btn-sm btn-ghost loading">Loading</button>
+
+    }
   </div>
 </div>

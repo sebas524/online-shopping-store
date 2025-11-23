@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { NotAuthenticatedGuard } from './auth/guards/not-authenticated.guard';
 
 export const routes: Routes = [
   {
@@ -7,6 +8,13 @@ export const routes: Routes = [
       import('./auth/auth.routes').then((m) => {
         return m.authRoutes;
       }),
+
+    canMatch: [
+      NotAuthenticatedGuard,
+      () => {
+        console.log('hello from guard in auth app routes');
+      },
+    ],
   },
 
   {

@@ -1,1 +1,87 @@
+@if(hasError()){
+
+<div role="alert" class="alert alert-error fixed top-5 right-5 w-52">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6 shrink-0 stroke-current"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+  <span>Please verify your info...</span>
+</div>
+
+}
+
 <p>login-page works!</p>
+
+<form
+  class="form-control space-y-4"
+  [formGroup]="myForm"
+  (ngSubmit)="onSubmit()"
+>
+  <div>
+    <label class="label">
+      <span class="label-text font-medium">Email</span>
+    </label>
+    <input
+      type="email"
+      class="input input-bordered w-full"
+      required
+      formControlName="email"
+    />
+  </div>
+
+  <div>
+    <label class="label">
+      <span class="label-text font-medium">Password</span>
+    </label>
+    <input
+      type="password"
+      class="input input-bordered w-full"
+      required
+      formControlName="password"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary w-full mt-2">Login</button>
+
+  <a
+    routerLink="/auth/register"
+    class="label-text-alt link link-hover text-primary"
+    >Dont have an account? Register here!</a
+  >
+</form>
+
+<div class="col">
+  <span>Valid</span>
+  <pre>{{ myForm.valid | json }}</pre>
+
+  <span>Pristine</span>
+  <pre>{{ myForm.pristine | json }}</pre>
+
+  <span>Touched</span>
+  <pre>{{ myForm.touched | json }}</pre>
+
+  <span>Value</span>
+  <pre>{{ myForm.value | json }}</pre>
+
+  <span>email value:</span>
+  <pre>{{ myForm.controls["email"].value | json }}</pre>
+
+  <span>password value:</span>
+  <pre>{{ myForm.controls["password"].value | json }}</pre>
+
+  <span class="text-red-400">email error:</span>
+
+  <pre>{{ myForm.controls["email"].errors | json }}</pre>
+  <span class="text-red-400">password error:</span>
+
+  <pre>{{ myForm.controls["password"].errors | json }}</pre>
+</div>
